@@ -1,0 +1,11 @@
+# Entorno virtual
+.venv/
+
+# Caché de Python
+__pycache__/
+
+# Checkpoints de Jupyter
+.ipynb_checkpoints/
+
+# Variables de entorno / secretos
+.env
