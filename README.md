@@ -38,6 +38,8 @@ Los datos son **sintéticos** (realistas, pero generados por computadora) y fuer
 ## Contenido
 
 - **[Análisis exploratorio de los datos (notebook)](notebooks/01_exploracion.ipynb):** contiene el código en Python con el paso a paso del análisis, explicado en texto, junto con los resultados obtenidos. Se utilizaron las librerías Pandas y Matplotlib.
+- **[Limpieza de los datos (notebook)](notebooks/02_limpieza.ipynb):** corrige los problemas detectados y guarda las tablas limpias en data/staging.
+- **[Construcción de las tablas finales (notebook)](notebooks/03_marts.ipynb):** arma el modelo estrella para el dashboard y guarda las tablas en data/marts.
 - **[Diccionario de datos](docs/data_dictionary.csv):** explica qué significa cada columna de las tablas.
 
 ## Los datos y cómo se relacionan
@@ -104,7 +106,7 @@ Las internaciones son las consultas más caras de a una (USD 7.761 en promedio),
 
 ### H3: cobertura de los seguros — SE CONFIRMA
 
-Casi la mitad de las consultas (48,7%) no tuvo ninguna cobertura, y los pacientes pagan de su bolsillo el **69,4%** de los costos. Las consultas sin seguro suman USD 49,3 millones, casi la mitad de la facturación del hospital. Los programas públicos son los que más cubren (Medicaid 94%, Dual Eligible 89,3% y Medicare 78%). Para más detalle, ver el **[notebook](notebooks/01_exploracion.ipynb)**.
+Casi la mitad de las consultas (48,7%) no tuvo ninguna cobertura, y los pacientes pagan de su bolsillo el **69,4%** de los costos. Las consultas sin seguro suman USD 49,3 millones, casi la mitad de la facturación del hospital. Los programas públicos son los que más cubren (Medicaid 94%, Dual Eligible 89,3% y Medicare 78%). Además, la parte del costo que cubren los seguros cayó del 47% en 2011 a entre el 23% y el 32% desde 2016: una parte creciente del costo recae en los pacientes. Para más detalle, ver el **[notebook](notebooks/01_exploracion.ipynb)**.
 
 ### H4: reinternaciones — SE CONFIRMA
 
@@ -118,7 +120,8 @@ Consideramos *reinternación* a una internación que ocurre dentro de los 30 dí
 - **143 internaciones** empiezan antes de que termine la anterior del mismo paciente: posibles errores de carga o traslados entre áreas.
 - Los **códigos postales** estaban cargados como números y perdían los ceros iniciales; los tratamos como texto.
 - No encontramos filas duplicadas en las tablas de procedimientos y aseguradoras.
-- Excluimos los **datos personales** de los pacientes (nombre y dirección), que no son necesarios para el análisis.
+- Dos aseguradoras tenían el código postal con 4 dígitos porque el archivo original había perdido el 0 inicial; se completaron a 5 dígitos.
+- Excluimos los **datos personales y sensibles** de los pacientes (nombre, dirección, origen étnico y coordenadas del domicilio), que no son necesarios para el análisis.
 
 ## Conclusiones y recomendaciones
 
