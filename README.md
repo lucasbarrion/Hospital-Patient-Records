@@ -1,5 +1,3 @@
-![Portada](dashboard/img/01_portada.png)
-
 # PROYECTO INDIVIDUAL: GESTIÓN HOSPITALARIA
 ### Análisis de costos, cobertura y reinternaciones de un hospital
 
@@ -150,15 +148,11 @@ Se navega con botones entre páginas y se puede filtrar por año y por asegurado
 
 Los indicadores principales del hospital, las consultas por tipo y los pacientes por rango de edad.
 
-![Resumen](dashboard/img/02_resumen.png)
-
 **Conclusiones:** 27.891 consultas, 974 pacientes y USD 101,5 M de costo total; el 48,7% de las consultas no tuvo cobertura y la tasa de reinternación es del 40,4%.
 
 ### Página 2 — Evolución anual
 
 Cómo cambiaron las consultas, los pacientes y los costos año a año.
-
-![Evolución anual](dashboard/img/03_evolucion.png)
 
 **Conclusiones:** hay dos picos de actividad, en 2014 (se duplican las consultas ambulatorias) y en 2021 (campaña de vacunación, con las internaciones en caída). 2022 es un año incompleto.
 
@@ -166,23 +160,17 @@ Cómo cambiaron las consultas, los pacientes y los costos año a año.
 
 Qué tipos de consulta concentran el presupuesto del hospital.
 
-![Costos](dashboard/img/04_costos.png)
-
 **Conclusiones:** las urgencias leves son el 13% de las consultas pero el 23% del costo, mientras que las internaciones son solo el 8,7%. El costo promedio es de USD 3.640, pero la mediana es de USD 279.
 
 ### Página 4 — Cobertura
 
 Qué parte del costo cubren los seguros y qué parte pagan los pacientes.
 
-![Cobertura](dashboard/img/05_cobertura.png)
-
 **Conclusiones:** los pacientes pagan el 69,4% del costo. Medicaid cubre el 94%, Dual Eligible el 89%, Medicare el 78% y Blue Cross el 68%; el resto casi nada. La cobertura cayó del 47% en 2011 a menos de un tercio desde 2016.
 
 ### Página 5 — Reinternaciones
 
 Los pacientes que vuelven a internarse dentro de los 30 días posteriores al alta.
-
-![Reinternaciones](dashboard/img/06_reinternaciones.png)
 
 **Conclusiones:** el 40,4% de las internaciones son reinternaciones dentro de los 30 días; solo 29 pacientes se reinternaron y los 10 primeros suman el 75,5%.
 
