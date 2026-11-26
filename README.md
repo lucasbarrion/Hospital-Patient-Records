@@ -15,7 +15,8 @@ En este proyecto nos situamos en el rol de **Analista de Datos**, realizando la 
 
 **La tarea.** Analizar las consultas, los costos, la cobertura de los seguros y las internaciones de los pacientes, verificar una serie de hipótesis planteadas junto a la dirección y proponer recomendaciones basadas en los datos.
 
-![Resumen](dashboard/img/02_resumen.png)
+![Quirófano de hospital](img/intro_hospital.jpg)
+<sub>Foto: Unsplash</sub>
 
 ## Descripción
 
