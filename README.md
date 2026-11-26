@@ -1,9 +1,11 @@
+![Portada](dashboard/img/01_portada.png)
+
 # PROYECTO INDIVIDUAL: GESTIÓN HOSPITALARIA
 ### Análisis de costos, cobertura y reinternaciones de un hospital
 
 ## Sumario
 
-En este proyecto nos situamos en el rol de **Analista de Datos**, realizando la exploración y el análisis de la información de un hospital entre 2011 y 2022. El objetivo es entender hacia dónde se destina el presupuesto del hospital, quién paga las consultas y qué pacientes generan más costos, para ayudar a la dirección a tomar mejores decisiones. Para ello, realizamos un análisis exploratorio de los datos con **Python**, y a partir de los hallazgos, planteamos conclusiones y recomendaciones de negocio.
+En este proyecto nos situamos en el rol de **Analista de Datos**, realizando la exploración y el análisis de la información de un hospital entre 2011 y 2022. El objetivo es entender hacia dónde se destina el presupuesto del hospital, quién paga las consultas y qué pacientes generan más costos, para ayudar a la dirección a tomar mejores decisiones. Para ello, realizamos un análisis exploratorio de los datos con **Python**, y a partir de los hallazgos, planteamos conclusiones y recomendaciones de negocio. Los resultados se presentan en un **[dashboard de Power BI](#dashboard-e-insights)**.
 
 ## Introducción: contexto, rol y tarea
 
@@ -12,6 +14,8 @@ En este proyecto nos situamos en el rol de **Analista de Datos**, realizando la 
 **Nuestro rol.** Fuimos convocados como **Analistas de Datos** para estudiar la información histórica del hospital y transformarla en respuestas concretas para la dirección.
 
 **La tarea.** Analizar las consultas, los costos, la cobertura de los seguros y las internaciones de los pacientes, verificar una serie de hipótesis planteadas junto a la dirección y proponer recomendaciones basadas en los datos.
+
+![Resumen](dashboard/img/02_resumen.png)
 
 ## Descripción
 
@@ -40,7 +44,9 @@ Los datos son **sintéticos** (realistas, pero generados por computadora) y fuer
 - **[Análisis exploratorio de los datos (notebook)](notebooks/01_exploracion.ipynb):** contiene el código en Python con el paso a paso del análisis, explicado en texto, junto con los resultados obtenidos. Se utilizaron las librerías Pandas y Matplotlib.
 - **[Limpieza de los datos (notebook)](notebooks/02_limpieza.ipynb):** corrige los problemas detectados y guarda las tablas limpias en data/staging.
 - **[Construcción de las tablas finales (notebook)](notebooks/03_marts.ipynb):** arma el modelo estrella para el dashboard y guarda las tablas en data/marts.
-- **[Diccionario de datos](docs/data_dictionary.csv):** explica qué significa cada columna de las tablas.
+- **[Dashboard de Power BI](dashboard/hospital_dashboard.pbix):** presenta los resultados del análisis en 6 páginas interactivas.
+- **[Gráficos del análisis (carpeta img)](img/):** imágenes de los gráficos principales del análisis exploratorio, generadas con el script [exportar_graficos.py](scripts/exportar_graficos.py).
+- **[Diccionario de datos](data_dictionary.csv):** explica qué significa cada columna de las tablas.
 
 ## Los datos y cómo se relacionan
 
@@ -94,21 +100,31 @@ erDiagram
 
 ### Perfil de los pacientes
 
+![Distribución de edad de los pacientes](img/eda_pacientes_edad.png)
+
 El hospital atiende sobre todo a **personas mayores y de la zona**: la edad promedio es de 68,6 años, más de un tercio tiene 80 años o más y el 66% vive en el condado de Suffolk, donde está el hospital. El género es parejo (494 hombres y 480 mujeres) y 154 pacientes fallecieron (16%). Para más detalle, ver el **[notebook](notebooks/01_exploracion.ipynb)**.
 
 ### H1: evolución en el tiempo — SE CONFIRMA
+
+![Consultas por año y por tipo](img/eda_evolucion_anual.png)
 
 La actividad del hospital no fue pareja: hubo dos picos. En **2014**, las consultas crecieron un 59% respecto de un año normal, por la duplicación de las consultas ambulatorias. En **2021**, las consultas externas casi se triplicaron por la aplicación de vacunas (probablemente contra el COVID-19), mientras que las internaciones cayeron un 56%. En ambos picos el costo promedio bajó, porque las consultas extra fueron de bajo costo. Para más detalle, ver el **[notebook](notebooks/01_exploracion.ipynb)**.
 
 ### H2: ¿dónde se va el presupuesto? — SE RECHAZA
 
+![Consultas y costo por tipo de consulta](img/eda_costos_por_tipo.png)
+
 Las internaciones son las consultas más caras de a una (USD 7.761 en promedio), pero como son solo el 4% del total, representan apenas el 8,7% de los costos. El presupuesto se concentra en las **consultas ambulatorias** (35,7% del costo, por su gran volumen) y, sobre todo, en las **urgencias leves**: son el 13% de las consultas pero generan el 23% de los costos. Para más detalle, ver el **[notebook](notebooks/01_exploracion.ipynb)**.
 
 ### H3: cobertura de los seguros — SE CONFIRMA
 
+![Cobertura por aseguradora y por año](img/eda_cobertura.png)
+
 Casi la mitad de las consultas (48,7%) no tuvo ninguna cobertura, y los pacientes pagan de su bolsillo el **69,4%** de los costos. Las consultas sin seguro suman USD 49,3 millones, casi la mitad de la facturación del hospital. Los programas públicos son los que más cubren (Medicaid 94%, Dual Eligible 89,3% y Medicare 78%). Además, la parte del costo que cubren los seguros cayó del 47% en 2011 a entre el 23% y el 32% desde 2016: una parte creciente del costo recae en los pacientes. Para más detalle, ver el **[notebook](notebooks/01_exploracion.ipynb)**.
 
 ### H4: reinternaciones — SE CONFIRMA
+
+![Top 10 de pacientes con más reinternaciones](img/eda_reinternaciones.png)
 
 Consideramos *reinternación* a una internación que ocurre dentro de los 30 días posteriores al alta anterior del mismo paciente. La tasa es del **40,4%**, pero el problema está muy concentrado: de 153 pacientes internados, solo 29 se reinternaron, y **10 de ellos explican el 75,5% de todas las reinternaciones** (uno solo llegó a 52). Para más detalle, ver el **[notebook](notebooks/01_exploracion.ipynb)**.
 
@@ -122,6 +138,53 @@ Consideramos *reinternación* a una internación que ocurre dentro de los 30 dí
 - No encontramos filas duplicadas en las tablas de procedimientos y aseguradoras.
 - Dos aseguradoras tenían el código postal con 4 dígitos porque el archivo original había perdido el 0 inicial; se completaron a 5 dígitos.
 - Excluimos los **datos personales y sensibles** de los pacientes (nombre, dirección, origen étnico y coordenadas del domicilio), que no son necesarios para el análisis.
+
+---
+
+## Dashboard e Insights
+
+Los resultados del análisis se presentan en un dashboard de Power BI de 6 páginas, construido sobre un modelo estrella con medidas DAX: [hospital_dashboard.pbix](dashboard/hospital_dashboard.pbix).
+Se navega con botones entre páginas y se puede filtrar por año y por aseguradora.
+
+### Página 1 — Resumen
+
+Los indicadores principales del hospital, las consultas por tipo y los pacientes por rango de edad.
+
+![Resumen](dashboard/img/02_resumen.png)
+
+**Conclusiones:** 27.891 consultas, 974 pacientes y USD 101,5 M de costo total; el 48,7% de las consultas no tuvo cobertura y la tasa de reinternación es del 40,4%.
+
+### Página 2 — Evolución anual
+
+Cómo cambiaron las consultas, los pacientes y los costos año a año.
+
+![Evolución anual](dashboard/img/03_evolucion.png)
+
+**Conclusiones:** hay dos picos de actividad, en 2014 (se duplican las consultas ambulatorias) y en 2021 (campaña de vacunación, con las internaciones en caída). 2022 es un año incompleto.
+
+### Página 3 — Costos
+
+Qué tipos de consulta concentran el presupuesto del hospital.
+
+![Costos](dashboard/img/04_costos.png)
+
+**Conclusiones:** las urgencias leves son el 13% de las consultas pero el 23% del costo, mientras que las internaciones son solo el 8,7%. El costo promedio es de USD 3.640, pero la mediana es de USD 279.
+
+### Página 4 — Cobertura
+
+Qué parte del costo cubren los seguros y qué parte pagan los pacientes.
+
+![Cobertura](dashboard/img/05_cobertura.png)
+
+**Conclusiones:** los pacientes pagan el 69,4% del costo. Medicaid cubre el 94%, Dual Eligible el 89%, Medicare el 78% y Blue Cross el 68%; el resto casi nada. La cobertura cayó del 47% en 2011 a menos de un tercio desde 2016.
+
+### Página 5 — Reinternaciones
+
+Los pacientes que vuelven a internarse dentro de los 30 días posteriores al alta.
+
+![Reinternaciones](dashboard/img/06_reinternaciones.png)
+
+**Conclusiones:** el 40,4% de las internaciones son reinternaciones dentro de los 30 días; solo 29 pacientes se reinternaron y los 10 primeros suman el 75,5%.
 
 ## Conclusiones y recomendaciones
 
